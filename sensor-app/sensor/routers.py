@@ -8,6 +8,16 @@ from typing import List
 router = APIRouter()
 
 
+@router.post("/measure/add")
+def send_measure(new_measure: MeasureCreate):
+    with Session(engine) as session:
+        db_measure = Measure.from_orm(new_measure)
+        session.add(db_measure)
+        session.commit()
+        session.refresh(db_measure)
+        return db_measure
+
+
 @router.post("/sensor/add")
 def create_sensor(new_sensor: SensorCreate):
     with Session(engine) as session:

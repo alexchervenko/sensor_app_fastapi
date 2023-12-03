@@ -7,7 +7,9 @@ app = FastAPI()
 
 app.include_router(sensor_router)
 
-SQLModel.metadata.create_all(engine)
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
 
 
 if __name__ == "__main__":
